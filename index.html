@@ -1,15 +1,24 @@
 <script src="https://cdn.jsdelivr.net/gh/netizenorg/netnet-standard-library/build/nn.min.js"></script>
+
 <script>
   /* global nn */
   
   let canvas, ctx
+  const file_index_1 = Math.floor(Math.random(28))
+  const file_index_2 = Math.floor(Math.random(28))
+  
+  const file_1 = `${file_index_1}.gif`
+  const file_2 = `${file_index_2}.gif`
   
   function setup () {
+    
     nn.get('body').css({ margin: '0', height: '100vh' })
     canvas = nn.create('canvas').addTo('body')
     canvas.width = nn.width // match the window's width
     canvas.height = nn.height // match the window's height
     ctx = canvas.getContext('2d')
+    
+      nn.create('img').set({src: file_1}).addTo('body')
   }
   
   function draw () {
