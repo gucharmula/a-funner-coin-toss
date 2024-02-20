@@ -4,28 +4,53 @@
   /* global nn */
   
   let canvas, ctx
-  const file_index_1 = Math.floor(Math.random(28))
-  const file_index_2 = Math.floor(Math.random(28))
   
-  const file_1 = `${file_index_1}.gif`
-  const file_2 = `${file_index_2}.gif`
+  const file_1 = `${nn.randomInt(0, 21)}.gif`
+  const file_2 = `${nn.randomInt(0, 21)}.gif`
+  
+  const w = nn.width
+  const h = nn.height
   
   function setup () {
     
-    nn.get('body').css({ margin: '0', height: '100vh' })
+    nn.get('body').css({margin: '0', height: '100vh'})
     canvas = nn.create('canvas').addTo('body')
-    canvas.width = nn.width // match the window's width
-    canvas.height = nn.height // match the window's height
+    canvas.width = w // match the window's width
+    canvas.height = h // match the window's height
     ctx = canvas.getContext('2d')
     
-      nn.create('img').set({src: file_1}).addTo('body')
+    ctx.font = "20px Courier New"
+    ctx.strokeText("Heather's Coin Toss", w/2-125, h/10)
+    ctx.strokeText("Heads", 20, 3*h/10)
+    ctx.strokeText("Tails", 20, 7*h/10)
+    
+    ctx.fillStyle = 'pink';
+    ctx.fillRect(0,0,canvas.width, canvas.height)
+    ctx.fillStyle = 'gray';
+    ctx.fillRect(100, h/5, w - 200, h/5)
+    ctx.fillRect(100, 3*h/5, w - 200, h/5)
+
+    nn.create('img').set({src: file_1}).css({
+        position: 'absolute',
+        width: `${w/5}px`,
+        height: `${h/5}px`,
+        left: `100px`,
+        top: `${h/5}px`
+      }).addTo('body')
+    
+    nn.create('img').set({src: file_2}).css({
+        position: 'absolute',
+        width: `${w/5}px`,
+        height: `${h/5}px`,
+        left: `100px`,
+        top: `${3*h/5}px`
+      }).addTo('body')
   }
   
   function draw () {
     requestAnimationFrame(draw) 
-    // draw something ...
   }
-  
+
   nn.on('load', setup)
   nn.on('load', draw)
   
