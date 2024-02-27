@@ -14,7 +14,11 @@
   const w = nn.width
   const h = nn.height
   
-  function draw(x1, x2) {
+  let i = 0
+  const speed1 = nn.randomInt(0, 20)
+  const speed2 = nn.randomInt(0, 20)
+  
+  function draw() {
 
     ctx.clearRect(0, 0, w, h)
 
@@ -28,8 +32,8 @@
     ctx.strokeText("Heads", 20, 3 * h / 10)
     ctx.strokeText("Tails", 20, 7 * h / 10)
 
-    ctx.drawImage(gif1, 100 + x1, h / 5, w / 5, h / 5)
-    ctx.drawImage(gif2, 100 + x2, 3 * h / 5, w / 5, h / 5)
+    ctx.drawImage(gif1, 100 + i * speed1, h / 5, w / 5, h / 5)
+    ctx.drawImage(gif2, 100 + i * speed2, 3 * h / 5, w / 5, h / 5)
   }
 
   function setup() {
@@ -45,28 +49,23 @@
     ctx = canvas.getContext('2d')
     ctx.font = "20px Courier New"
 
-    let i = 0
+    
     let running = true
 
-    const speed1 = nn.randomInt(0, 20)
-    const speed2 = nn.randomInt(0, 20)
+    while (false) {
+      setTimeout(draw, 300)
 
-    while (running) {
-      draw(i * speed1, i * speed2)
-
-      if (i * speed1 >= 4 * w / 5 - 200) {
-        running = false
-        ctx.clearRect(0, 0, w, h)
-        ctx.strokeText("Heads Wins!", w / 2 - 125, h / 10)
-      }
+        if (i * speed1 >= 4 * w / 5 - 200) {
+          running = false
+          ctx.clearRect(0, 0, w, h)
+          ctx.strokeText("Heads Wins!", w / 2 - 125, h / 10)
+        }
       
-      if (i * speed2 >= 4 * w / 5 - 200) {
-        running = false
-        ctx.clearRect(0, 0, w, h)
-        ctx.strokeText("Tails Wins!", w / 2 - 125, h / 10)
-      }
-  
-      i = i + 1
+        if (i * speed2 >= 4 * w / 5 - 200) {
+          running = false
+          ctx.clearRect(0, 0, w, h)
+          ctx.strokeText("Tails Wins!", w / 2 - 125, h / 10)
+        }
     }
   }
 
