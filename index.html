@@ -2,56 +2,67 @@
 
 <script>
   /* global nn */
-  
+
   let canvas, ctx
-  
-  const file_1 = `${nn.randomInt(0, 21)}.gif`
-  const file_2 = `${nn.randomInt(0, 21)}.gif`
-  
+
+  const gif1 = new Image()
+  gif1.src = `${nn.randomInt(0, 21)}.gif`
+
+  const gif2 = new Image()
+  const gif2.src = `${nn.randomInt(0, 21)}.gif`
+
   const w = nn.width
   const h = nn.height
-  
-  function setup () {
-    
-    nn.get('body').css({margin: '0', height: '100vh'})
+
+  function setup() {
+
+    nn.get('body').css({
+      margin: '0',
+      height: '100vh'
+    })
     canvas = nn.create('canvas').addTo('body')
     canvas.width = w // match the window's width
     canvas.height = h // match the window's height
     ctx = canvas.getContext('2d')
-    
     ctx.font = "20px Courier New"
-    ctx.strokeText("Heather's Coin Toss", w/2-125, h/10)
-    ctx.strokeText("Heads", 20, 3*h/10)
-    ctx.strokeText("Tails", 20, 7*h/10)
-    
-    ctx.fillStyle = 'pink';
-    ctx.fillRect(0,0,canvas.width, canvas.height)
-    ctx.fillStyle = 'gray';
-    ctx.fillRect(100, h/5, w - 200, h/5)
-    ctx.fillRect(100, 3*h/5, w - 200, h/5)
 
-    nn.create('img').set({src: file_1}).css({
-        position: 'absolute',
-        width: `${w/5}px`,
-        height: `${h/5}px`,
-        left: `100px`,
-        top: `${h/5}px`
-      }).addTo('body')
-    
-    nn.create('img').set({src: file_2}).css({
-        position: 'absolute',
-        width: `${w/5}px`,
-        height: `${h/5}px`,
-        left: `100px`,
-        top: `${3*h/5}px`
-      }).addTo('body')
+    let i = 0
+    let running = true
+
+    const speed1 = nn.randomInt(0, 20)
+    const speed2 = nn.randomInt(0, 20)
+
+    while (false) {
+      draw(i * speed1, i * speed2)
+
+      if (i * speed1 >= 4 * w / 5 - 200) {
+        ctx.clearRect(0, 0, w, h)
+        ctx.strokeText("Heather's Coin Toss", w / 2 - 125, h / 10)
+      }
+      if (i * speed2 >= 4 * w / 5 - 200) {
+        ctx.clearRect(0, 0, w, h)
+        ctx.strokeText("Heather's Coin Toss", w / 2 - 125, h / 10)
+      }
+    }
   }
-  
-  function draw () {
-    requestAnimationFrame(draw) 
+
+  function draw(x1, x2) {
+
+    ctx.clearRect(0, 0, w, h)
+
+    ctx.strokeText("Heather's Coin Toss", w / 2 - 125, h / 10)
+    ctx.strokeText("Heads", 20, 3 * h / 10)
+    ctx.strokeText("Tails", 20, 7 * h / 10)
+
+    ctx.fillStyle = 'pink';
+    ctx.fillRect(0, 0, canvas.width, canvas.height)
+    ctx.fillStyle = 'gray';
+    ctx.fillRect(100, h / 5, w - 200, h / 5)
+    ctx.fillRect(100, 3 * h / 5, w - 200, h / 5)
+
+    ctx.drawImage(gif1, 100 + x1, h / 5, w / 5, h / 5)
+    ctx.drawImage(gif2, 100 + x2, 3 * h / 5, w / 5, h / 5)
   }
 
   nn.on('load', setup)
-  nn.on('load', draw)
-  
 </script>
