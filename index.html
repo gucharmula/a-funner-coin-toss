@@ -51,9 +51,9 @@
     const speed1 = nn.randomInt(0, 20)
     const speed2 = nn.randomInt(0, 20)
 
-    while (false) {
+    while (running) {
       draw(i * speed1, i * speed2)
-      setTimeout(i++, 100)
+      setTimeout(i++, 1000)
 
       if (i * speed1 >= 4 * w / 5 - 200) {
         running = false
@@ -66,7 +66,7 @@
         ctx.clearRect(0, 0, w, h)
         ctx.strokeText("Tails Wins!", w / 2 - 125, h / 10)
       }
-      
+  
       i = i + 1
     }
   }
