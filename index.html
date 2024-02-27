@@ -55,7 +55,7 @@
     let running = true
 
     while (false) {
-      setTimeout(draw, 300)
+      requestAnimationFrame(draw)
 
         if (i * speed1 >= 4 * w / 5 - 200) {
           running = false
