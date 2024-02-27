@@ -9,7 +9,7 @@
   gif1.src = `${nn.randomInt(0, 21)}.gif`
 
   const gif2 = new Image()
-  const gif2.src = `${nn.randomInt(0, 21)}.gif`
+  gif2.src = `${nn.randomInt(0, 21)}.gif`
 
   const w = nn.width
   const h = nn.height
@@ -34,14 +34,19 @@
 
     while (false) {
       draw(i * speed1, i * speed2)
+      i++
+      sleep(100)
 
       if (i * speed1 >= 4 * w / 5 - 200) {
+        running = false
         ctx.clearRect(0, 0, w, h)
-        ctx.strokeText("Heather's Coin Toss", w / 2 - 125, h / 10)
+        ctx.strokeText("Heads Wins!", w / 2 - 125, h / 10)
       }
+      
       if (i * speed2 >= 4 * w / 5 - 200) {
+        running = false
         ctx.clearRect(0, 0, w, h)
-        ctx.strokeText("Heather's Coin Toss", w / 2 - 125, h / 10)
+        ctx.strokeText("Tails Wins!", w / 2 - 125, h / 10)
       }
     }
   }
