@@ -13,6 +13,24 @@
 
   const w = nn.width
   const h = nn.height
+  
+  function draw(x1, x2) {
+
+    ctx.clearRect(0, 0, w, h)
+
+    ctx.fillStyle = 'pink';
+    ctx.fillRect(0, 0, canvas.width, canvas.height)
+    ctx.fillStyle = 'gray';
+    ctx.fillRect(100, h / 5, w - 200, h / 5)
+    ctx.fillRect(100, 3 * h / 5, w - 200, h / 5)
+    
+    ctx.strokeText("Heather's Coin Toss", w / 2 - 125, h / 10)
+    ctx.strokeText("Heads", 20, 3 * h / 10)
+    ctx.strokeText("Tails", 20, 7 * h / 10)
+
+    ctx.drawImage(gif1, 100 + x1, h / 5, w / 5, h / 5)
+    ctx.drawImage(gif2, 100 + x2, 3 * h / 5, w / 5, h / 5)
+  }
 
   function setup() {
 
@@ -33,9 +51,9 @@
     const speed1 = nn.randomInt(0, 20)
     const speed2 = nn.randomInt(0, 20)
 
-    while (running) {
+    while (false) {
       draw(i * speed1, i * speed2)
-      sleep(100)
+      setTimeout(i++, 100)
 
       if (i * speed1 >= 4 * w / 5 - 200) {
         running = false
@@ -53,23 +71,7 @@
     }
   }
 
-  function draw(x1, x2) {
 
-    ctx.clearRect(0, 0, w, h)
-
-    ctx.fillStyle = 'pink';
-    ctx.fillRect(0, 0, canvas.width, canvas.height)
-    ctx.fillStyle = 'gray';
-    ctx.fillRect(100, h / 5, w - 200, h / 5)
-    ctx.fillRect(100, 3 * h / 5, w - 200, h / 5)
-    
-    ctx.strokeText("Heather's Coin Toss", w / 2 - 125, h / 10)
-    ctx.strokeText("Heads", 20, 3 * h / 10)
-    ctx.strokeText("Tails", 20, 7 * h / 10)
-
-    ctx.drawImage(gif1, 100 + x1, h / 5, w / 5, h / 5)
-    ctx.drawImage(gif2, 100 + x2, 3 * h / 5, w / 5, h / 5)
-  }
 
   nn.on('load', setup)
 
