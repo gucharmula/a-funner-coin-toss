@@ -53,7 +53,7 @@
 
     while (running) {
       draw(i * speed1, i * speed2)
-      setTimeout(i++, 1000)
+      i++
 
       if (i * speed1 >= 4 * w / 5 - 200) {
         running = false
@@ -74,5 +74,6 @@
 
 
   nn.on('load', setup)
+  
 
 </script>
